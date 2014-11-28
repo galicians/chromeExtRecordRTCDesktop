@@ -1,0 +1,27 @@
+{
+  "manifest_version":2,
+  "name": "StackOverTube recording",
+   "version":"1.0",
+  "description": "it will record and upload your videoAnswers",
+
+  "page_action": {
+    "default_icon":"icon.png",
+    "default_title":"StackOverTube",
+    "default_popup":"popup.html"
+  },
+  "background": {
+    "scripts":["eventPage.js"],
+    "persistent": false
+  },
+  "content_scripts":[
+    {
+      "matches": ["*://localhost:*/*", "*://*.peaceful-hamlet-4485.herokuapp.com/*"],
+      "js":["stackOverTube_cs.js","jquery-1.11.1.js"]
+    }
+  ],
+  "permissions": [
+    "desktopCapture",
+    "tabs",
+    "*://*.peaceful-hamlet-4485.herokuapp.com/*"
+  ]
+}
