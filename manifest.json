@@ -16,7 +16,7 @@
   "content_scripts":[
     {
       "matches": ["*://localhost:*/*", "*://*.peaceful-hamlet-4485.herokuapp.com/*"],
-      "js":["stackOverTube_cs.js","jquery-1.11.1.js"]
+      "js":["stackOverTube_cs.js","jquery-1.11.1.js","recordRTC.js"]
     }
   ],
   "permissions": [

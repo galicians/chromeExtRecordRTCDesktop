@@ -3,9 +3,8 @@
 function gotStream(stream) {
     console.log("Received local stream");
   $('#video').attr({"src": URL.createObjectURL(stream) })
-  // $("#divVideo video")[0].load();
-  console.log()
-  // video.src = URL.createObjectURL(stream);
+  // $('#video').attr({"muted": true})
+  console.log(URL.createObjectURL(stream))
   localstream = stream;
   stream.onended = function() { console.log("Ended"); };
 }
@@ -30,8 +29,10 @@ $(function() {
 })
 
 
-
-
+$(function() {
+    $('#stop').click(function() { console.log('hello user') })
+    chrome.desktopCapture.chooseDesktopMedia(["screen",'window'], onAccessApproved)
+})
 
 
 
