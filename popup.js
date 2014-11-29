@@ -28,47 +28,27 @@ function gotStream(stream) {
 
 
 
-
 // ---------------------posting to the server// ---------------------
 
 function postFiles(video) {
-    // getting unique identifier for the file name
-    // fileName = generateRandomString();
+  
+    // var fileName = generateRandomString();
     var fileName = 'pablo'
     // this object is used to allow submitting multiple recorded blobs
     var files = { };
 
-    // recorded audio blob
-    // files.audio = {
-    //     name: fileName + '.' + audio.blob.type.split('/')[1],
-    //     type: audio.blob.type,
-    //     contents: audio.dataURL
-    // };
-
+    files.video = {
+        name: fileName + '.' + video.blob.type.split('/')[1],
+        type: video.blob.type,
+        contents: video.dataURL
+    };
    
-        files.video = {
-            name: fileName + '.' + video.blob.type.split('/')[1],
-            type: video.blob.type,
-            contents: video.dataURL
-        };
-   
-        console.log('inside of postfiles, my video object looks like, ', files.video)
-    // files.uploadOnlyAudio = !video;
+    console.log('inside of postfiles, my video object looks like, ', files)
 
-    // videoElement.src = '';
-    // videoElement.poster = '/ajax-loader.gif';
-
-    xhr('http://localhost:8000/', JSON.stringify(files), function(_fileName) {
+    xhr('http://localhost:8000/upload', JSON.stringify(files), function(_fileName) {
         var href = location.href.substr(0, location.href.lastIndexOf('/') + 1);
         console.log('in the client inside xhr')
-        // videoElement.src = href + 'uploads/' + _fileName;
-        // videoElement.play();
-        // videoElement.muted = false;
-        // videoElement.controls = true;
-
-        // var h2 = document.createElement('h2');
-        // h2.innerHTML = '<a href="' + videoElement.src + '">' + videoElement.src + '</a>';
-        // document.body.appendChild(h2);
+   
     });
 
     // if(mediaStream) mediaStream.stop();
@@ -96,7 +76,9 @@ function xhr(url, data, callback) {
     request.upload.onload = function() {
         console.log('request.upload.onload')
     };
+    console.log(url)
     request.open('POST', url);
+    console.log(data)
     request.send(data);
 }
 
