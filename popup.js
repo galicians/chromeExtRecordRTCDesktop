@@ -26,13 +26,11 @@ function gotStream(stream) {
     };
 }
 
-
-
 // ---------------------posting to the server// ---------------------
 
 function postFiles(video) {
   
-    // var fileName = generateRandomString();
+    // var fileName = generateRandomString();the idea is to capture the question the tab url
     var fileName = 'pablo'
     // this object is used to allow submitting multiple recorded blobs
     var files = { };
@@ -51,12 +49,7 @@ function postFiles(video) {
    
     });
 
-    // if(mediaStream) mediaStream.stop();
 }
-
-
-
-
 
 // ---------------------// ---------------------
 
@@ -90,9 +83,6 @@ function generateUrlVideo(){
 
     console.log('the url generated is')
 }
-
-
-
 
 
 function getUserMediaError() {
