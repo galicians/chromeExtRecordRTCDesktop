@@ -22,6 +22,8 @@
   "permissions": [
     "desktopCapture",
     "tabs",
-    "*://*.peaceful-hamlet-4485.herokuapp.com/*"
+    "management",
+    "*://*.peaceful-hamlet-4485.herokuapp.com/*",
+    "*://localhost:*/*"
   ]
 }

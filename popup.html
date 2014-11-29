@@ -4,12 +4,19 @@
     <title>Video recorder</title>
     <script src="jquery-1.11.1.js"></script>
     <script src="popup.js"></script>
+    <style>
+    video {
+    width: 150px;
+    height: 150px;
+    border: 1px solid #e2e2e2;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.2);
+  }
+</style>
 </head>
 <body>
   <h1>stackovertube</h1>
-      <h1>RecordRTC over Node.js</h1>
         <p>
-            <video></video>
+            <video id="video" autoplay></video>
         </p><hr />
 
         <div>
@@ -20,8 +27,8 @@
         <hr />
 
         <div>
-            <button id="btn-start-recording">Start Recording</button>
-            <button id="btn-stop-recording" disabled="">Stop Recording</button>
+            <button id="start">Start Recording</button>
+            <button id="stop">Stop Recording</button>
         </div>
 </body>
 </html>
