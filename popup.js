@@ -1,6 +1,7 @@
 var filename;
 var videoRecorder;
-var audioConfig = {};
+var audioRecorder;
+var audioConfig = { type: 'audio'};
 
 
 
@@ -11,8 +12,38 @@ function gotStream(stream) {
     var videoConfig = { type: 'video' };
     videoRecorder = RecordRTC(stream, videoConfig);
     videoRecorder.startRecording();
+    audioRecorder = RecordRTC(stream, audioConfig);
+    audioRecorder.startRecording();
+    
+  stream.onended = function() { 
+    console.log("Ended");
+    audioRecorder.getDataURL(function(audioDataURL) {
+        var audio = {
+            blob: audioRecorder.getBlob(),
+            dataURL: audioDataURL
+        };
+        console.log('inside getDataURL')
+        // if record both wav and webm
+        if(!isRecordOnlyAudio) {
+            videoRecorder.getDataURL(function(videoDataURL) {
+                var video = {
+                    blob: videoRecorder.getBlob(),
+                    dataURL: videoDataURL
+                };
 
-  stream.onended = function() { console.log("Ended"); };
+                postFiles(video);
+            });
+        }
+
+     
+        if (isRecordOnlyAudio) postFiles(audio);
+    });
+
+
+
+
+    };
+  // videoRecorder.stopRecording(stream.onended)
 }
 
 function xhr(url, data, callback) {
@@ -34,10 +65,13 @@ function xhr(url, data, callback) {
     request.send(data);
 }
 
-
+function onStopRecording() {
+ console.log('on stop recoring')
+}
 
 function generateUrlVideo(){
 
+    console.log('the url generated is')
 }
 
 
@@ -51,7 +85,6 @@ function getUserMediaError() {
 
 function onAccessApproved(id) {
    navigator.webkitGetUserMedia({
-      audio:false,
       video: { mandatory: { chromeMediaSource: "desktop",
                             chromeMediaSourceId: id } }
   }, gotStream, getUserMediaError);
@@ -63,10 +96,7 @@ $(function() {
 })
 
 
-$(function() {
-    $('#stop').click(function() { console.log('hello user') })
-    chrome.desktopCapture.chooseDesktopMedia(["screen",'window'], onAccessApproved)
-})
+
 
 
 

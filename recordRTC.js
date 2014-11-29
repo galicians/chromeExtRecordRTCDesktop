@@ -69,7 +69,8 @@
 
 function RecordRTC(mediaStream, config) {
     config = config || {};
-
+    console.log('in recordRTC library with config', config)
+    console.log('in recordRTC library with mediaStream', mediaStream)
     if (!mediaStream) {
         throw 'MediaStream is mandatory.';
     }
