@@ -1,9 +1,5 @@
 var filename;
 var videoRecorder;
-var audioRecorder;
-var audioConfig = { type: 'audio'};
-
-
 
 function gotStream(stream) {
     var mediaStream = stream;
@@ -12,38 +8,23 @@ function gotStream(stream) {
     var videoConfig = { type: 'video' };
     videoRecorder = RecordRTC(stream, videoConfig);
     videoRecorder.startRecording();
-    audioRecorder = RecordRTC(stream, audioConfig);
-    audioRecorder.startRecording();
-    
+  
   stream.onended = function() { 
     console.log("Ended");
-    audioRecorder.getDataURL(function(audioDataURL) {
-        var audio = {
-            blob: audioRecorder.getBlob(),
-            dataURL: audioDataURL
+
+    videoRecorder.stopRecording(function(videoUrl){
+        videoRecorder.getDataURL(function(videoDataURL) {
+        var video = {
+            blob: videoRecorder.getBlob(),
+            dataURL: videoDataURL 
         };
-        console.log('inside getDataURL')
-        // if record both wav and webm
-        if(!isRecordOnlyAudio) {
-            videoRecorder.getDataURL(function(videoDataURL) {
-                var video = {
-                    blob: videoRecorder.getBlob(),
-                    dataURL: videoDataURL
-                };
-
-                postFiles(video);
-            });
-        }
-
-     
-        if (isRecordOnlyAudio) postFiles(audio);
-    });
-
-
-
+        console.log(video)
+        postFiles(video);
+        });
+    })
 
     };
-  // videoRecorder.stopRecording(stream.onended)
+
 }
 
 function xhr(url, data, callback) {
