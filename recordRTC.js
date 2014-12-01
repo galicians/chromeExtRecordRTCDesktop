@@ -1619,11 +1619,11 @@ function WhammyRecorder(mediaStream) {
          */
         this.record = function() {
             if (!this.width) {
-                this.width = 320;
+                this.width = 1280;
             }
 
             if (!this.height) {
-                this.height = 240;
+                this.height = 800;
             }
 
             if (!this.video) {

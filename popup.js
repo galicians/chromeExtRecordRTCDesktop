@@ -2,6 +2,8 @@
 var videoRecorder;
 
 function gotStream(stream) {
+    console.log(window.screen.width)
+    console.log(window.screen.height)
     var mediaStream = stream;
     console.log("Received  media stream: ", mediaStream);
     $('#video').attr({"src": URL.createObjectURL(mediaStream) })
@@ -92,7 +94,9 @@ function getUserMediaError() {
 
 function onAccessApproved(id) {
    navigator.webkitGetUserMedia({
-      video: { mandatory: { chromeMediaSource: "desktop",
+      video: { mandatory: { maxWidth: window.screen.width,
+                            maxHeight: window.screen.height,
+                            chromeMediaSource: "desktop",
                             chromeMediaSourceId: id } }
   }, gotStream, getUserMediaError);
 }
