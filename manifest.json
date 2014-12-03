@@ -16,12 +16,14 @@
   "content_scripts":[
     {
       "matches": ["*://localhost:*/*", "*://*.peaceful-hamlet-4485.herokuapp.com/*"],
-      "js":["stackOverTube_cs.js","jquery-1.11.1.js","recordRTC.js"]
+      "js":["stackOverTube_cs.js","jquery-1.11.1.js","recordRTC.js","script.js","popup.js"]
     }
   ],
   "permissions": [
     "desktopCapture",
     "tabs",
+    "activeTab",
+    "storage",
     "management",
     "*://*.peaceful-hamlet-4485.herokuapp.com/*",
     "*://localhost:*/*"

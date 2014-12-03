@@ -3,12 +3,12 @@
 <head>
     <title>Video recorder</title>
     <script src="jquery-1.11.1.js"></script>
-    <script src="popup.js"></script>
+     <script src="popup.js"></script>
     <script src="recordRTC.js"> </script>
     <style>
     video {
-    width: 1080px;
-    height: 720px;
+    width: 250px;
+    height: 250px;
     border: 1px solid #e2e2e2;
     box-shadow: 0 1px 1px rgba(0,0,0,0.2);
   }
@@ -18,18 +18,7 @@
   <h1>stackovertube</h1>
         <p>
             <video id="video" autoplay></video>
-        </p><hr />
-
-        <div>
-            <label id="percentage">0%</label>
-            <progress id="progress-bar" value=0></progress><br />
-        </div>
-
-        <hr />
-
-        <div>
-            <button id="start">Start Recording</button>
-            <button id="stop">Stop Recording</button>
-        </div>
+        </p>
+        <button class="btn btn-default" id="start" type="button">Record</button>
 </body>
 </html>

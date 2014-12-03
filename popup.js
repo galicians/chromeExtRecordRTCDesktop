@@ -1,5 +1,8 @@
 
 var videoRecorder;
+var user;
+var numAnswer;
+var questionId;
 
 function gotStream(stream) {
     console.log(window.screen.width)
@@ -32,13 +35,16 @@ function gotStream(stream) {
 
 function postFiles(video) {
   
-    // var fileName = generateRandomString();the idea is to capture the question the tab url
-    var fileName = 'pablo'
+    var fileName = 'answer_' + questionId + "_" + numAnswer
+    console.log(fileName)
+    console.log(user)
+
     // this object is used to allow submitting multiple recorded blobs
     var files = { };
-
+    
     files.video = {
         name: fileName + '.' + video.blob.type.split('/')[1],
+        author: user,
         type: video.blob.type,
         contents: video.dataURL
     };
@@ -52,6 +58,8 @@ function postFiles(video) {
     });
 
 }
+
+
 
 // ---------------------// ---------------------
 
@@ -101,10 +109,35 @@ function onAccessApproved(id) {
   }, gotStream, getUserMediaError);
 }
 
-$(function() {
-    $('#start').click(function() { console.log('hello user') })
+// $(function() {
+//     $('#start').click(function() {  })
     chrome.desktopCapture.chooseDesktopMedia(["screen",'window'], onAccessApproved)
+// })
+
+
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    console.log(request)
+    if (request.script == "data") { 
+    user = request.aut;
+    numAnswer = request.countAnswers
+    questionId = request.qId
+    console.log("Author is: ", user)
+    console.log("Answer number: ", numAnswer)
+    console.log("question id: ", questionId)
+    }
+});
+
+chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
+  console.log('inside extension', request)
+   user = request.aut;
+    numAnswer = request.countAnswers
+    questionId = request.qId
 })
+
+
+chrome.storage.local.get('a', function(result) { user = result['a'] } )
+chrome.storage.local.get('num', function(result) { numAnswer = result.num } )
+chrome.storage.local.get('id', function(result) { questionId = result['id'] } )
 
 
 
