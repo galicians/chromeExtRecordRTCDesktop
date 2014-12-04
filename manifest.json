@@ -6,17 +6,17 @@
 
   "page_action": {
     "default_icon":"icon.png",
-    "default_title":"StackOverTube",
-    "default_popup":"popup.html"
+    "default_title":"StackOverTube"
+    // "default_popup":"popup.html"
   },
   "background": {
-    "scripts":["eventPage.js"],
+    "scripts":["eventPage.js","popup.js","recordRTC.js"],
     "persistent": false
   },
   "content_scripts":[
     {
-      "matches": ["*://localhost:*/*", "*://*.peaceful-hamlet-4485.herokuapp.com/*"],
-      "js":["stackOverTube_cs.js","jquery-1.11.1.js","recordRTC.js","script.js","popup.js"]
+      "matches": ["*://localhost:*/*", "*://*.stackovertube.herokuapp.com/*"],
+      "js":["stackOverTube_cs.js","jquery-1.11.1.js","recordRTC.js","script.js"]
     }
   ],
   "permissions": [
@@ -25,7 +25,7 @@
     "activeTab",
     "storage",
     "management",
-    "*://*.peaceful-hamlet-4485.herokuapp.com/*",
+    "*://*.stackovertube.herokuapp.com/*",
     "*://localhost:*/*"
   ]
 }

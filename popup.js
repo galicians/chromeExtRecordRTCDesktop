@@ -9,7 +9,7 @@ function gotStream(stream) {
     console.log(window.screen.height)
     var mediaStream = stream;
     console.log("Received  media stream: ", mediaStream);
-    $('#video').attr({"src": URL.createObjectURL(mediaStream) })
+    // $('#video').attr({"src": URL.createObjectURL(mediaStream) })
     var videoConfig = { type: 'video' };
     videoRecorder = RecordRTC(stream, videoConfig);
     videoRecorder.startRecording();
@@ -60,7 +60,6 @@ function postFiles(video) {
 }
 
 
-
 // ---------------------// ---------------------
 
 
@@ -109,17 +108,13 @@ function onAccessApproved(id) {
   }, gotStream, getUserMediaError);
 }
 
-// $(function() {
-//     $('#start').click(function() {  })
-    chrome.desktopCapture.chooseDesktopMedia(["screen",'window'], onAccessApproved)
-// })
-
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     console.log(request)
     if (request.script == "data") { 
     user = request.aut;
     numAnswer = request.countAnswers
+    chrome.desktopCapture.chooseDesktopMedia(["screen",'window'], onAccessApproved)
     questionId = request.qId
     console.log("Author is: ", user)
     console.log("Answer number: ", numAnswer)
