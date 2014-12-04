@@ -16,7 +16,7 @@
   "content_scripts":[
     {
       "matches": ["*://localhost:*/*", "*://*.stackovertube.herokuapp.com/*"],
-      "js":["stackOverTube_cs.js","jquery-1.11.1.js","recordRTC.js","script.js"]
+      "js":["stackOverTube_cs.js","jquery-1.11.1.js","recordRTC.js","script.js","popup.js"]
     }
   ],
   "permissions": [
